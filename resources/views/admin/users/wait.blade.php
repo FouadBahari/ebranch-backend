@@ -1,17 +1,17 @@
 @extends('layouts.admin')
-@section('title',"{{$nametype}}")
+@section('title',"السائقين بانتظار التفعيل")
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  {{$nametype}} </h3>
+                    <h3 class="content-header-title"> السائقين بانتظار التفعيل </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{$nametype}}
+                                <li class="breadcrumb-item active"> السائقين بانتظار التفعيل
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{$nametype}}</h4>
+                                    <h4 class="card-title">السائقين بانتظار التفعيل</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -50,9 +50,6 @@
                                                 <th>الاسم </th>
                                                 <th>الهاتف</th>
                                                 <th>البريد الالكتروني</th>
-                                                @if ($type == "vendor")
-                                                    <th>الخدمة</th>
-                                                @endif
                                                 <th>العنوان</th>
                                                 <th>الإجراءات</th>
                                             </tr>
@@ -65,19 +62,11 @@
                                                         <td>{{$user-> name}}</td>
                                                         <td dir="ltr">{{$user-> phone}}</td>
                                                         <td>{{$user-> email}}</td>
-                                                        @if ($type == "vendor")
-                                                            <td>{{$user->service->name}}</td>
-                                                        @endif
                                                         <td>{{$user->address}}</td>
                                                         <td>
                                                             <div class="btn-group btn-sm" role="group" aria-label="Basic example">
-                                                                <a href="{{route('admin.users.edit',$user -> id)}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-                                                            {{--<a href="{{route('admin.users.delete',$user -> id)}}"
-                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-                                                                    <a href=""
-                                                                    class="btn btn-outline-info btn-min-width box-shadow-3 mr-1 mb-1">تفاصيل</a>--}}
+                                                                <a href="{{route('admin.users.approved',$user -> id)}}"
+                                                                    class="btn btn-outline-success btn-min-width box-shadow-3 mr-1 mb-1">تفعيل</a>
                                                             </div>
                                                         </td>
                                                     </tr>

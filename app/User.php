@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email','phone','photo','type', 'password',
+        'name', 'email','phone','wallet','status','service_id','photo','type','address','lat','lang','token','password',
     ];
 
     /**
@@ -52,5 +52,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function service()
+    {
+        return $this->belongsTo('App\Models\Service','service_id','id');
     }
 }

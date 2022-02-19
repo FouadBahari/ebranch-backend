@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"تعديل مستخدم")
+@section('title',"تعديل {{$nametype}}")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.users')}}">  المستخدمين </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.users',$user->type)}}">  {{$nametype}} </a>
                                 </li>
-                                <li class="breadcrumb-item active">تعديل مستخدم - {{$user->name}}
+                                <li class="breadcrumb-item active">تعديل {{$nametype}} - {{$user->name}}
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل  مستخدم </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل  {{$nametype}}  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -45,18 +45,56 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form" action="{{route('admin.users.update',$user -> id)}}"
-                                            method="POST">
+                                            method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <input name="id" value="{{$user -> id}}" type="hidden">
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <img
+                                                        src="@if (!empty($user-> photo))
+                                                        {{asset($user -> photo)}}
+                                                            @else
+                                                        {{asset("Adminlook/images/admin.png")}}
+                                                        @endif"
+                                                        class="rounded-circle  height-150" alt="صورة">
+                                                </div>
+                                            </div>
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات المستخدم </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات {{$nametype}}  </h4>
                                                         <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">صورة  {{$nametype}}  </label>
+                                                                    <input type="file" value="" id="name" class="form-control"
+                                                                        name="photo" required>
+                                                                    @error("photo")
+                                                                <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            @if ($user->type == "vendor")
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">الخدمات</label>
+                                                                        <select name="service_id" id=""   class="form-control" @if ($user->type == "vendor") required @endif>
+                                                                            @foreach ($services as $service)
+                                                                                <option value="{{$service->id}}" @if ($service->id == $user->service_id)
+                                                                                    selected
+                                                                                @endif>{{$service->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    @error("service_id")
+                                                                <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            @endif
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> اسم المستخدم </label>
+                                                                    <label for="projectinput1"> اسم {{$nametype}}  </label>
                                                                     <input type="text" value="{{$user->name}}" id="name"
                                                                         class="form-control"
-                                                                        placeholder="اسم المستخدم"
+                                                                        placeholder="اسم {{$nametype}} "
                                                                         name="name" required>
                                                                     @error("name")
                                                                 <span class="text-danger">{{$message}}</span>
@@ -95,6 +133,18 @@
                                                                         placeholder="اذا اردت كلمة السر القديم اترك الحقل فارغ"
                                                                         name="password" required>
                                                                     @error("password")
+                                                                <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">العنوان</label>
+                                                                    <input type="url" value="{{$user->address}}"  id="address"
+                                                                        class="form-control"
+                                                                        placeholder="العنوان"
+                                                                        name="address" required>
+                                                                    @error("address")
                                                                 <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>

@@ -4,16 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         return view('admin.dashboard');
+    }
+
+    public function products()
+    {
+        $products = Product::get();
+        return view('admin.product',compact('products'));
     }
 
     public function editprofile()
@@ -100,6 +108,81 @@ class DashboardController extends Controller
         /////////////////////////////////////////////////
         }
 
+    }
+
+    public function chargers()
+    {
+        $admins = Admin::where('id','!=',1)->get();
+        return view('admin.chargers.index',compact('admins'));
+    }
+
+    public function createchargers()
+    {
+        return view('admin.chargers.create');
+    }
+
+    public function storechargers(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'       => 'required',
+            'phone'      => 'required|unique:admins,phone',
+            'email'      => 'required|email|unique:admins,email',
+            'password'   => 'required|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            notify()->error('حدث خطا ما برجاء المحاوله مرة اخري');
+            return redirect( route('admin.chargers.create'))
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        Admin::create([
+            'name'       => $request->name,
+            'phone'      => $request->phone,
+            'email'      => $request->email,
+            "password"   =>  Hash::make($request->password)
+        ]);
+
+        notify()->success('تم اضافة بنجاح');
+        return redirect()->route('admin.chargers')->with(["success","تم اضافة بنجاح"]);
+    }
+
+    public function editchargers($id)
+    {
+        $admin = Admin::find($id);
+        return view('admin.chargers.edit',compact('admin'));
+    }
+
+    public function update(Request $request , $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'       => 'required',
+            'phone'      => 'required|unique:admins,phone,'.$id,
+            'email'      => 'required|email|unique:admins,email,'.$id,
+            'password'   => 'required|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            notify()->error('حدث خطا ما برجاء المحاوله مرة اخري');
+            return redirect( route('admin.chargers.edit',$id))
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        if($request->has('password')){
+            Admin::where('id',$id)
+                ->update([
+                    'password' => Hash::make($request->password),
+                ]);
+        }
+
+        Admin::where('id', $id)->update([
+            'name'       => $request->name,
+            'phone'      => $request->phone,
+            'email'      => $request->email,
+        ]);
+
+        notify()->success('تم تحديث بيانات بنجاح');
+        return redirect()->route('admin.chargers')->with(["success","تم تحديث بيانات بنجاح"]);
     }
 
 }

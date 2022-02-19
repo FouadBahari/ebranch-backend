@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"اضافة {{$nametype}}")
+@section('title',"تعديل شركة شحن")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.users',$type)}}">  {{$nametype}} </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.chargers')}}">  شركات الشجن </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة {{$nametype}}
+                                <li class="breadcrumb-item active">تعديل شركة شحن
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة  {{$nametype}} </h4>
+                                    <h4 class="card-title" id="basic-layout-form">تعديل شركة شحن </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,44 +44,20 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.users.store')}}"
-                                            method="POST" enctype="multipart/form-data">
+                                        <form class="form" action="{{route('admin.chargers.update',$admin->id)}}"
+                                            method="POST">
                                             @csrf
-                                            <input type="hidden" name="type" value="{{$type}}">
+                                            <input type="hidden" name="id" value="{{$admin->id}}">
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات {{$nametype}} </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات شركة شحن </h4>
                                                         <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1">صورة  {{$nametype}}  </label>
-                                                                    <input type="file" value="" id="name" class="form-control"
-                                                                        name="photo" required>
-                                                                    @error("photo")
-                                                                <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            @if ($type == "vendor")
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1">الخدمات</label>
-                                                                        <select name="service_id" id=""   class="form-control" @if ($type == "vendor") required @endif>
-                                                                            @foreach ($services as $service)
-                                                                                <option value="{{$service->id}}">{{$service->name}}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    @error("service_id")
-                                                                <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            @endif
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> اسم {{$nametype}} </label>
-                                                                    <input type="text" value="" id="name"
+                                                                    <label for="projectinput1"> اسم شركة الشحن </label>
+                                                                    <input type="text" value="{{$admin->name}}" id="name"
                                                                         class="form-control"
-                                                                        placeholder="اسم {{$nametype}}"
+                                                                        placeholder="اسم شركة الشحن"
                                                                         name="name" required>
                                                                     @error("name")
                                                                 <span class="text-danger">{{$message}}</span>
@@ -91,7 +67,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> رقم الهاتف </label>
-                                                                    <input type="tel" value="" id="phone"
+                                                                    <input type="tel" value="{{$admin->phone}}" id="phone"
                                                                         class="form-control"
                                                                         placeholder=" رقم الهاتف"
                                                                         name="phone" required dir="ltr">
@@ -103,7 +79,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> البريد الالكتروني</label>
-                                                                    <input type="email" value="" id="email"
+                                                                    <input type="email" value="{{$admin->email}}" id="email"
                                                                         class="form-control"
                                                                         placeholder=" البريد الالكتروني"
                                                                         name="email" required>
@@ -115,47 +91,11 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">كلمة السر</label>
-                                                                    <input type="password" value="" id="password"
+                                                                    <input type="password" id="password"
                                                                         class="form-control"
                                                                         placeholder="كلمة السر"
                                                                         name="password" required>
                                                                     @error("password")
-                                                                <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1">العنوان</label>
-                                                                    <input type="text" value="" id="address"
-                                                                        class="form-control"
-                                                                        placeholder="العنوان"
-                                                                        name="address" required>
-                                                                    @error("address")
-                                                                <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1">lat</label>
-                                                                    <input type="text" value="" id="lat"
-                                                                        class="form-control"
-                                                                        placeholder="lat"
-                                                                        name="lat" required>
-                                                                    @error("lat")
-                                                                <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1">lang</label>
-                                                                    <input type="text" value="" id="address"
-                                                                        class="form-control"
-                                                                        placeholder="lang"
-                                                                        name="lang" required>
-                                                                    @error("address")
                                                                 <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>

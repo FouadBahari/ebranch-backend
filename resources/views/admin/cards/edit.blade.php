@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"اضافة خدمات")
+@section('title',"تعديل كروت الشحن")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.services')}}">  الخدمات </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.cards')}}"> كروت الشحن </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة خدمة
+                                <li class="breadcrumb-item active">تعديل كروت الشحن
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة  خدمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form">تعديل كروت الشحن </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,30 +44,33 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.services.store')}}"
-                                            method="POST" enctype="multipart/form-data">
+                                        <form class="form" action="{{route('admin.cards.update',$card->id)}}"
+                                            method="POST">
                                             @csrf
+                                            <input type="hidden" name="id" value="{{$card->id}}">
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الخدمة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات كروت الشحن </h4>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">صورة الخدمة </label>
-                                                                    <input type="file" id="name" class="form-control"
-                                                                        name="photo" required>
-                                                                    @error("photo")
-                                                                        <span class="text-danger">{{$message}}</span>
+                                                                    <label for="projectinput1"> كود الشحن </label>
+                                                                    <input type="text" value="{{$card->code}}" id="code"
+                                                                        class="form-control"
+                                                                        placeholder="كود الشحن"
+                                                                        name="code" required readonly>
+                                                                    @error("code")
+                                                                <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> اسم الخدمة </label>
-                                                                    <input type="text" value="" id="name"
+                                                                    <label for="projectinput1">قيمة الشحن </label>
+                                                                    <input type="number" value="{{$card->price}}" id="price"
                                                                         class="form-control"
-                                                                        placeholder="اسم الخدمة "
-                                                                        name="name" required>
-                                                                    @error("name")
+                                                                        placeholder="قيمة الشحن"
+                                                                        name="price" required>
+                                                                    @error("price")
                                                                 <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
@@ -81,7 +84,7 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
                                         </form>

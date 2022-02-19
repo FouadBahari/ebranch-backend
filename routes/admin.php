@@ -23,8 +23,18 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
     Route::get('/Editprofile', 'DashboardController@editprofile')->name('admin.editprofile');
     Route::post('/updateprofile/{id}', 'DashboardController@updateprofile')->name('admin.updateprofile');
     Route::post('/logout', 'DashboardController@logout')->name('admin.logout');
+    Route::get('/products', 'DashboardController@products')->name('admin.products');
 
-
+######################### Begin services Routes ########################Done
+Route::group(['prefix' => 'chargers'], function () {
+    Route::get('/','DashboardController@chargers') -> name('admin.chargers');
+    Route::get('create','DashboardController@createchargers') -> name('admin.chargers.create');
+    Route::post('store','DashboardController@storechargers') -> name('admin.chargers.store');
+    Route::get('edit/{id}','DashboardController@editchargers') -> name('admin.chargers.edit');
+    Route::post('update/{id}','DashboardController@updatechargers') -> name('admin.chargers.update');
+    //Route::get('delete/{id}','DashboardController@destroychargers') -> name('admin.chargers.delete');
+});
+######################### End services Routes  ########################
     ######################### Begin services Routes ########################Done
     Route::group(['prefix' => 'services'], function () {
         Route::get('/','ServicesController@index') -> name('admin.services');
@@ -36,7 +46,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
     });
     ######################### End services Routes  ########################
 
-    ######################### Begin coupons Routes ########################Done
+    ######################### Begin coupons Routes ########################
     Route::group(['prefix' => 'coupons'], function () {
         Route::get('/','CouponsController@index') -> name('admin.coupons');
         Route::get('create','CouponsController@create') -> name('admin.coupons.create');
@@ -46,17 +56,39 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
         //Route::get('delete/{id}','CouponsController@destroy') -> name('admin.coupons.delete');
     });
     ######################### End coupons Routes  ########################
+    ######################### Begin counteries Routes ########################
+    Route::group(['prefix' => 'counteries'], function () {
+        Route::get('/','CounteryController@index') -> name('admin.counteries');
+        Route::get('create','CounteryController@create') -> name('admin.counteries.create');
+        Route::post('store','CounteryController@store') -> name('admin.counteries.store');
+        Route::get('edit/{id}','CounteryController@edit') -> name('admin.counteries.edit');
+        Route::post('update/{id}','CounteryController@update') -> name('admin.counteries.update');
+        //Route::get('delete/{id}','CounteryController@destroy') -> name('admin.counteries.delete');
+    });
+    ######################### End counteries Routes  ########################
 
     ######################### Begin users Routes ########################Done
     Route::group(['prefix' => 'users'], function () {
-    Route::get('/','UserController@index') -> name('admin.users');
-    Route::get('create','UserController@create') -> name('admin.users.create');
+    Route::get('/{type}','UserController@index') -> name('admin.users');
+    Route::get('/driver/wait-approve','UserController@waitapprove') -> name('admin.users.waitapprove');
+    Route::get('/approved/{id}','UserController@approved') -> name('admin.users.approved');
+    Route::get('create/{type}','UserController@create') -> name('admin.users.create');
     Route::post('store','UserController@store') -> name('admin.users.store');
     Route::get('edit/{id}','UserController@edit') -> name('admin.users.edit');
     Route::post('update/{id}','UserController@update') -> name('admin.users.update');
     //Route::get('delete/{id}','UserController@destroy') -> name('admin.users.delete');
 });
 ######################### End users Routes  #######################
+######################### Begin cards Routes ########################
+Route::group(['prefix' => 'cards'], function () {
+    Route::get('/','CardController@index') -> name('admin.cards');
+    Route::get('create','CardController@create') -> name('admin.cards.create');
+    Route::post('store','CardController@store') -> name('admin.cards.store');
+    Route::get('edit/{id}','CardController@edit') -> name('admin.cards.edit');
+    Route::post('update/{id}','CardController@update') -> name('admin.cards.update');
+    //Route::get('delete/{id}','CardController@destroy') -> name('admin.cards.delete');
+});
+######################### End cards Routes  ########################
 
 
 });

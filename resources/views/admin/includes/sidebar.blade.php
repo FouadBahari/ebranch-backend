@@ -5,6 +5,21 @@
         <li class="nav-item"><a href="{{route('admin.dashboard')}}"><i class="la la-home"></i><span
             class="menu-title" data-i18n="nav.add_on_drag_drop.main">الصفحة الرئيسية </span></a>
         </li>
+        {{-- <li class="nav-item">
+                <a href=""><i class="la la-tasks"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">الدول </span>
+                        <span
+                            class="badge badge badge-info  badge-pill float-right mr-2">{{App\Models\Countery::count()}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{route('admin.counteries')}}"
+                            data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
+                        </li>
+                        <li><a class="menu-item" href="{{route('admin.counteries.create')}}"
+                            data-i18n="nav.dash.ecommerce">اضافة دولة</a>
+                        </li>
+                    </ul>
+            </li> --}}
 
             <li class="nav-item">
                 <a href=""><i class="la la-tasks"></i>
@@ -29,11 +44,8 @@
                                 class="badge badge badge-warning  badge-pill float-right mr-2">{{App\User::where('type','user')->count()}}</span>
                         </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="{{route('admin.users')}}"
+                            <li><a class="menu-item" href="{{route('admin.users','user')}}"
                                 data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
-                            </li>
-                            <li><a class="menu-item" href="{{route('admin.users.create')}}"
-                                data-i18n="nav.dash.ecommerce">اضافة مستخدم</a>
                             </li>
                         </ul>
                 </li>
@@ -45,10 +57,10 @@
                                 class="badge badge badge-primary  badge-pill float-right mr-2">{{App\User::where('type','vendor')->count()}}</span>
                         </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.users','vendor')}}"
                                 data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.users.create','vendor')}}"
                                 data-i18n="nav.dash.ecommerce">اضافة تاجر</a>
                             </li>
                         </ul>
@@ -60,11 +72,41 @@
                                 class="badge badge badge-primary  badge-pill float-right mr-2">{{App\User::where('type','driver')->count()}}</span>
                         </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.users','driver')}}"
                                 data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
                             </li>
-                            <li><a class="menu-item" href=""
-                                data-i18n="nav.dash.ecommerce">اضافة تاجر</a>
+                            <li><a class="menu-item" href="{{route('admin.users.waitapprove')}}"
+                                data-i18n="nav.dash.ecommerce"> بانتظار التفعيل  </a>
+                            </li>
+                        </ul>
+                </li>
+                <li class="nav-item">
+                    <a href=""><i class="la la-male"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">شركات الشحن  </span>
+                            <span
+                                class="badge badge badge-primary  badge-pill float-right mr-2">{{App\Models\Admin::where('id','!=',1)->count()}}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('admin.chargers')}}"
+                                data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.chargers.create')}}"
+                                data-i18n="nav.dash.ecommerce">اضافة شركة</a>
+                            </li>
+                        </ul>
+                </li>
+                <li class="nav-item">
+                    <a href=""><i class="la la-male"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">كروت الشحن  </span>
+                            <span
+                                class="badge badge badge-primary  badge-pill float-right mr-2">{{App\Models\Card::count()}}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('admin.cards')}}"
+                                data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.cards.create')}}"
+                                data-i18n="nav.dash.ecommerce">اضافة كرت</a>
                             </li>
                         </ul>
                 </li>
@@ -75,11 +117,8 @@
                                 class="badge badge badge-primary  badge-pill float-right mr-2">{{App\Models\Product::count()}}</span>
                         </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.products')}}"
                                 data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
-                            </li>
-                            <li><a class="menu-item" href=""
-                                data-i18n="nav.dash.ecommerce">اضافة منتج</a>
                             </li>
                         </ul>
                 </li>
@@ -94,7 +133,7 @@
                                 data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
                             </li>
                             <li><a class="menu-item" href="{{route('admin.coupons.create')}}"
-                                data-i18n="nav.dash.ecommerce">اضافة تاجر</a>
+                                data-i18n="nav.dash.ecommerce">اضافة كوبون</a>
                             </li>
                         </ul>
                 </li>

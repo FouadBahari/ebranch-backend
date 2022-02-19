@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"اضافة خدمات")
+@section('title',"اضافة دولة")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.services')}}">  الخدمات </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.counteries')}}">  الدول </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة خدمة
+                                <li class="breadcrumb-item active">إضافة دولة
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة  خدمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة  دولة </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,30 +44,42 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.services.store')}}"
-                                            method="POST" enctype="multipart/form-data">
+                                        <form class="form" action="{{route('admin.counteries.store')}}"
+                                            method="POST">
                                             @csrf
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الخدمة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الدولة </h4>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">صورة الخدمة </label>
-                                                                    <input type="file" id="name" class="form-control"
+                                                                    <label for="projectinput1">صورة الدولة </label>
+                                                                    <input type="file" value="" id="name" class="form-control"
                                                                         name="photo" required>
                                                                     @error("photo")
-                                                                        <span class="text-danger">{{$message}}</span>
+                                                                <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> اسم الخدمة </label>
+                                                                    <label for="projectinput1"> اسم الدولة </label>
                                                                     <input type="text" value="" id="name"
                                                                         class="form-control"
-                                                                        placeholder="اسم الخدمة "
+                                                                        placeholder="اسم الدولة "
                                                                         name="name" required>
                                                                     @error("name")
+                                                                <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1"> كود الدولة </label>
+                                                                    <input type="text" value="" id="code"
+                                                                        class="form-control"
+                                                                        placeholder="كود الدولة  "
+                                                                        name="code" required>
+                                                                    @error("code")
                                                                 <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
