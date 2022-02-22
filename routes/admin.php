@@ -24,6 +24,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
     Route::post('/updateprofile/{id}', 'DashboardController@updateprofile')->name('admin.updateprofile');
     Route::post('/logout', 'DashboardController@logout')->name('admin.logout');
     Route::get('/products', 'DashboardController@products')->name('admin.products');
+    Route::get('/settings', 'DashboardController@settings')->name('admin.settings');
+    Route::post('/update-settings', 'DashboardController@updatesettings')->name('admin.settings.update');
 
 ######################### Begin services Routes ########################Done
 Route::group(['prefix' => 'chargers'], function () {

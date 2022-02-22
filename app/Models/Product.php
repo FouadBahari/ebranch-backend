@@ -18,4 +18,26 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Cat','cat_id','id');
     }
+
+    public function client()
+    {
+        return $this->belongsToMany('App\User','carts');
+    }
+
+    /*many to many create record
+    $user = User::find(2);
+    $products = [1, 2];
+    $user->products()->attach($products);  || $user->products()->sync($products);*/
+
+    /*many to many remove record
+    $user = User::find(2);
+    $products = [1, 2];
+    $user->products()->detach($products);  || $user->products()->sync($products);*/
+
+    /*many to many select record
+    $user = User::find(1);
+    foreach ($user->products as $product) {
+        echo $product->pivot->created_at;
+    }
+    */
 }

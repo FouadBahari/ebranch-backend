@@ -23,12 +23,17 @@ Route::group(['namespace' => 'API\Auth'], function () {
     Route::post('signup-user', 'UserController@signup');
     Route::post('Edit-Profile', 'UserController@editprofile');
     Route::get('Data-Edit-User', 'UserController@dataedituser');
+    Route::get('Add-to-cart/{product}', 'UserController@addtocart');
+    Route::get('Remove-from-cart/{product}', 'UserController@removetocart');
+    Route::get('All-in-cart', 'UserController@allincart');
+
+    Route::get('charge-card/{code}', 'UserController@chargecard');
+    Route::get('Order-charge-card', 'UserController@orderschargecard');
+
+    #####################orders############################
 });
 
-#####################Driver############################
-Route::group(['namespace' => 'API\Auth'], function () {
-    //
-});
+
 ####################APIS#######################
 Route::group(['namespace' => 'API'], function () {
     Route::get('services', 'ApiController@services');

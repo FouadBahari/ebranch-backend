@@ -23,7 +23,7 @@
 
             <li class="nav-item">
                 <a href=""><i class="la la-tasks"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main">الخدمات </span>
+                        <span class="menu-title" data-i18n="nav.dash.main">الاقسام </span>
                         <span
                             class="badge badge badge-info  badge-pill float-right mr-2">{{App\Models\Service::count()}}</span>
                     </a>
@@ -32,7 +32,7 @@
                             data-i18n="nav.dash.ecommerce"> عرض الكل  </a>
                         </li>
                         <li><a class="menu-item" href="{{route('admin.services.create')}}"
-                            data-i18n="nav.dash.ecommerce">اضافة خدمة</a>
+                            data-i18n="nav.dash.ecommerce">اضافة قسم</a>
                         </li>
                     </ul>
             </li>
@@ -180,6 +180,16 @@
                         <ul class="menu-content">
                             <li><a class="menu-item" href=""
                                 data-i18n="nav.dash.ecommerce">عرض الكل  </a>
+                            </li>
+                        </ul>
+                </li>
+                <li class="nav-item">
+                    <a href=""><i class="la la-life-bouy"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">الاعدادات  </span>
+                        </a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('admin.settings')}}"
+                                data-i18n="nav.dash.ecommerce">عرض الاعدادات  </a>
                             </li>
                         </ul>
                 </li>

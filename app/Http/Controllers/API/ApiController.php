@@ -22,57 +22,57 @@ class ApiController extends Controller
 
     public function services()
     {
-        $services = Service::paginate(10);
+        $services = Service::get();
         return  $this -> returnData('services' , $services,'Done Get services');
     }
 
     public function allvendors()
     {
-        $allvendors = User::where('type','vendors')->get();
-        return  $this -> returnData('allvendors' , $allvendors,'Done Get allvendors');
+        $allvendors = User::where('type','vendor')->get();
+        return  $this -> returnData('vendors' , $allvendors,'Done Get allvendors');
     }
 
     public function searchvendors($name)
     {
-        $vendors = User::where('name',$name)->get();
+        $vendors = User::where('type','vendor')->where('name',$name)->get();
         return  $this -> returnData('vendors' , $vendors,'Done Get vendors');
     }
 
     public function vendors($idservice)
     {
-        $vendors = User::where('type','vendors')->where('service_id',$idservice)->paginate(10);
+        $vendors = User::where('type','vendor')->where('service_id',$idservice)->get();
         return  $this -> returnData('vendors',$vendors,'Done Get vendors');
     }
 
     public function categories($vendor)
     {
         $cats = Cat::where('user_id',$vendor)->get();
-        return  $this -> returnData('cats' , $cats,'Done Get cats');
+        return  $this -> returnData('services' , $cats,'Done Get services');
     }
 
 
     public function offers($vendor)
     {
-        $offers = Product::where('user_id',$vendor)->where('offer','!=',0)->whereNotNull('offer')->get();
-        return  $this -> returnData('offers' , $offers,'Done Get offers');
+        $offers = Product::where('user_id',$vendor)->where('offer','!=',0)->whereNotNull('offer')->with('cat')->get();
+        return  $this -> returnData('data' , $offers,'Done Get offers');
     }
 
     public function bestselles($vendor)
     {
-        $bestselles = Product::where('user_id',$vendor)->get();
-        return  $this -> returnData('bestselles' , $bestselles,'Done Get bestselles');
+        $bestselles = Product::where('user_id',$vendor)->with('cat')->get();
+        return  $this -> returnData('data' , $bestselles,'Done Get bestselles');
     }
 
     public function products()
     {
-        $products = Product::inRandomOrder()->get();
-        return  $this -> returnData('products' , $products,'Done Get products');
+        $products = Product::inRandomOrder()->with('cat')->get();
+        return  $this -> returnData('data' , $products,'Done Get products');
     }
 
     public function productsvendor($cat)
     {
-        $products = Product::where('cat_id',$cat)->paginate(10);
-        return  $this -> returnData('products' , $products,'Done Get products');
+        $products = Product::where('cat_id',$cat)->with('cat')->paginate(10);
+        return  $this -> returnData('data' , $products,'Done Get products');
     }
 
     public function contactus(Request $request)
@@ -128,7 +128,7 @@ class ApiController extends Controller
             $credentials = $request->only(['phone','password']) ;
             if(Auth::guard('api')->attempt($credentials)){
                 $user = Auth::guard('api')->user();
-                User::find(Auth::id())->update(['token' => $request->token]);
+                User::find($user->id)->update(['token' => $request->token]);
                 $user-> api_token = Auth::guard('api')->attempt($credentials);
                 if($user->status == 0){
                     return $this->returnError('E001','بانتظار التفعيل من الادمن');

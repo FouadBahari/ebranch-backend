@@ -185,4 +185,13 @@ class DashboardController extends Controller
         return redirect()->route('admin.chargers')->with(["success","تم تحديث بيانات بنجاح"]);
     }
 
+    public function settings()
+    {
+        return view('admin.settings');
+    }
+    public function updatesettings(Request $request)
+    {
+        //
+    }
+
 }
