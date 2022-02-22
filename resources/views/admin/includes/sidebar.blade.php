@@ -185,11 +185,41 @@
                 </li>
                 <li class="nav-item">
                     <a href=""><i class="la la-life-bouy"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">البنارات</span>
+                            <span
+                                class="badge badge badge-warning  badge-pill float-right mr-2">{{App\Models\Banner::count()}}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('admin.banners')}}"
+                                data-i18n="nav.dash.ecommerce">عرض الكل  </a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.banners.create')}}"
+                                data-i18n="nav.dash.ecommerce">اضافة بانر  </a>
+                            </li>
+                        </ul>
+                </li>
+                <li class="nav-item">
+                    <a href=""><i class="la la-life-bouy"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">اسباب المرتج والمتعثر</span>
+                            <span
+                                class="badge badge badge-warning  badge-pill float-right mr-2">{{App\Models\Reason::count()}}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('admin.reasons')}}"
+                                data-i18n="nav.dash.ecommerce">عرض الكل  </a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.reasons.create')}}"
+                                data-i18n="nav.dash.ecommerce">اضافة سبب  </a>
+                            </li>
+                        </ul>
+                </li>
+                <li class="nav-item">
+                    <a href=""><i class="la la-life-bouy"></i>
                             <span class="menu-title" data-i18n="nav.dash.main">الاعدادات  </span>
                         </a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="{{route('admin.settings')}}"
-                                data-i18n="nav.dash.ecommerce">عرض الاعدادات  </a>
+                                data-i18n="nav.dash.ecommerce">الاعدادت العامة  </a>
                             </li>
                         </ul>
                 </li>

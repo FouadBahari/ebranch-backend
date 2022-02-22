@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"تعديل خدمات")
+@section('title',"تعديل الاقسام")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.services')}}">  الخدمات </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.services')}}">  الاقسام </a>
                                 </li>
-                                <li class="breadcrumb-item active">تعديل خدمة -  {{$service->name}}
+                                <li class="breadcrumb-item active">تعديل الاقسام -  {{$service->name}}
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل  خدمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل  الاقسام </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -60,11 +60,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الخدمة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">صورة الخدمة </label>
+                                                                    <label for="projectinput1">صورة القسم </label>
                                                                     <input type="file" value="" id="name" class="form-control"
                                                                         name="photo">
                                                                     @error("photo")
@@ -74,7 +74,7 @@
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> اسم الخدمة </label>
+                                                                    <label for="projectinput1"> اسم القسم </label>
                                                                     <input type="text" value="{{$service->name}}" id="name"
                                                                         class="form-control"
                                                                         placeholder="  "

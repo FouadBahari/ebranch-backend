@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"تعديل خدمات")
+@section('title',"تعديل كوبون الخصم")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.services')}}">  الخدمات </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.coupons')}}">  كوبونات الخصم </a>
                                 </li>
-                                <li class="breadcrumb-item active">تعديل خدمة -  {{$service->name}}
+                                <li class="breadcrumb-item active">تعديل كوبون الخصم
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل  خدمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل  كوبون الخصم </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,17 +44,17 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.services.update',$service -> id)}}"
+                                        <form class="form" action="{{route('admin.coupons.update',$coupon -> id)}}"
                                             method="POST">
                                             @csrf
-                                            <input name="id" value="{{$service -> id}}" type="hidden">
+                                            <input name="id" value="{{$coupon -> id}}" type="hidden">
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الخدمة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات كوبونات الخصم </h4>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> اسم الخدمة </label>
-                                                                    <input type="text" value="{{$service->name}}" id="name"
+                                                                    <label for="projectinput1"> اسم كوبون الخصم </label>
+                                                                    <input type="text" value="{{$coupon->name}}" id="name"
                                                                         class="form-control"
                                                                         placeholder="  "
                                                                         name="name" required>
@@ -65,9 +65,12 @@
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">  الوصف الخدمة </label>
-                                                                        <textarea name="description" class="form-control" rows="15" cols="20">{{$service->description}}</textarea>
-                                                                    @error("description")
+                                                                    <label for="projectinput1">نسبة الخصم </label>
+                                                                    <input type="number" value="{{$coupon->percent}}" id="percent"
+                                                                        class="form-control"
+                                                                        placeholder="نسبة الخصم"
+                                                                        name="percent" required>
+                                                                    @error("percent")
                                                                 <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>

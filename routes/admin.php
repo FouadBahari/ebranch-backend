@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
     Route::post('/updateprofile/{id}', 'DashboardController@updateprofile')->name('admin.updateprofile');
     Route::post('/logout', 'DashboardController@logout')->name('admin.logout');
     Route::get('/products', 'DashboardController@products')->name('admin.products');
+    //////////////////settings//////////////////
     Route::get('/settings', 'DashboardController@settings')->name('admin.settings');
     Route::post('/update-settings', 'DashboardController@updatesettings')->name('admin.settings.update');
 
@@ -91,6 +92,26 @@ Route::group(['prefix' => 'cards'], function () {
     //Route::get('delete/{id}','CardController@destroy') -> name('admin.cards.delete');
 });
 ######################### End cards Routes  ########################
+######################### Begin banners Routes ########################
+Route::group(['prefix' => 'banners'], function () {
+    Route::get('/','BannerController@index') -> name('admin.banners');
+    Route::get('create','BannerController@create') -> name('admin.banners.create');
+    Route::post('store','BannerController@store') -> name('admin.banners.store');
+    Route::get('edit/{id}','BannerController@edit') -> name('admin.banners.edit');
+    Route::post('update/{id}','BannerController@update') -> name('admin.banners.update');
+    //Route::get('delete/{id}','BannerController@destroy') -> name('admin.banners.delete');
+});
+######################### End banners Routes  ########################
+######################### Begin reasons Routes ########################
+Route::group(['prefix' => 'reasons'], function () {
+    Route::get('/','ReasonController@index') -> name('admin.reasons');
+    Route::get('create','ReasonController@create') -> name('admin.reasons.create');
+    Route::post('store','ReasonController@store') -> name('admin.reasons.store');
+    Route::get('edit/{id}','ReasonController@edit') -> name('admin.reasons.edit');
+    Route::post('update/{id}','ReasonController@update') -> name('admin.reasons.update');
+    //Route::get('delete/{id}','ReasonController@destroy') -> name('admin.reasons.delete');
+});
+######################### End reasons Routes  ########################
 
 
 });

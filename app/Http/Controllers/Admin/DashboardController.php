@@ -187,11 +187,13 @@ class DashboardController extends Controller
 
     public function settings()
     {
-        return view('admin.settings');
+        $admin = Admin::find(1);
+        return view('admin.settings.settings',compact('admin'));
     }
     public function updatesettings(Request $request)
     {
-        //
+        notify()->success('تم تحديث بيانات بنجاح');
+        return redirect()->route('admin.settings')->with(["success","تم تحديث بيانات بنجاح"]);
     }
 
 }

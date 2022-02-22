@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title',"اضافة الاقسام")
+@section('title',"اضافة البنارات")
 
 @section('content')
 
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.services')}}">  الاقسام </a>
+                            <li class="breadcrumb-item"><a href="{{route('admin.banners')}}">  البنارات </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة الاقسام
+                                <li class="breadcrumb-item active">إضافة البنارات
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة  الاقسام </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة  البنارات </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,31 +44,19 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.services.store')}}"
+                                        <form class="form" action="{{route('admin.banners.store')}}"
                                             method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الاقسام </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات البنارات </h4>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">صورة القسم </label>
+                                                                    <label for="projectinput1">صورة البنارات </label>
                                                                     <input type="file" id="name" class="form-control"
                                                                         name="photo" required>
                                                                     @error("photo")
                                                                         <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1"> اسم القسم </label>
-                                                                    <input type="text" value="" id="name"
-                                                                        class="form-control"
-                                                                        placeholder="اسم القسم "
-                                                                        name="name" required>
-                                                                    @error("name")
-                                                                <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
                                                             </div>

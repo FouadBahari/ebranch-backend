@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
 use Twilio\Rest\Client;
@@ -10,6 +11,7 @@ use App\Models\Cat;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Reason;
 use App\Models\Service;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -99,11 +101,17 @@ class ApiController extends Controller
             return $this->returnSuccessMessage('تم الارسال بنجاح');
         }
 
-    // public function sliders($id)
-    // {
-    //     $sliders = Image::where('cat_id',$id)->inRandomOrder()->limit(50)->get();
-    //     return  $this -> returnData('sliders' , $sliders,'Done Get sliders');
-    // }
+    public function sliders()
+    {
+        $sliders = Banner::inRandomOrder()->limit(5)->get();
+        return  $this -> returnData('data' , $sliders,'Done Get sliders');
+    }
+
+    public function reasons($type)
+    {
+        $reasons = Reason::where('type',$type)->get();
+        return  $this -> returnData('data' , $reasons,'Done Get reasons');
+    }
 
     public function logins(Request $request)
     {

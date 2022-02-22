@@ -31,6 +31,7 @@ Route::group(['namespace' => 'API\Auth'], function () {
     Route::get('Order-charge-card', 'UserController@orderschargecard');
 
     #####################orders############################
+    //
 });
 
 
@@ -49,6 +50,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::post('contact-us', 'ApiController@contactus');
 
     Route::get('sliders', 'ApiController@sliders');
+    Route::get('reasons/{type}', 'ApiController@reasons');
     Route::post('logins', 'ApiController@logins');
     // Route::post('Forget-Password', 'ApiController@forgetpass');
     // Route::post('Verify-Forget-Password', 'ApiController@verifyforgetpass');
