@@ -29,9 +29,18 @@ Route::group(['namespace' => 'API\Auth'], function () {
 
     Route::get('charge-card/{code}', 'UserController@chargecard');
     Route::get('Order-charge-card', 'UserController@orderschargecard');
+    Route::get('notifications', 'UserController@notifications');
 
     #####################orders############################
-    //
+    Route::post('make-order', 'OrderController@makeorder');
+    ///////////////////orders-user
+    Route::get('current-orders', 'OrderController@currentorders');
+    Route::get('old-orders', 'OrderController@oldorders');
+    Route::get('cancel-order/{id}', 'OrderController@cancelorder');
+    Route::post('finish-order', 'OrderController@finishorder');
+    ///////////////////orders-driver
+    Route::post('replay-order', 'OrderController@replayorder');
+    Route::get('orders/{type}', 'OrderController@ordersdriver');
 });
 
 

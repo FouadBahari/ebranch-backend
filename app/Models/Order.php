@@ -14,8 +14,8 @@ class Order extends Model
         return $this->belongsTo('App\User','user_id','id');
     }
 
-    public function product()
+    public function driver()
     {
-        return $this->belongsTo('App\Models\Product','product_id','id');
+        return $this->belongsTo('App\User','driver_id','id');
     }
 }

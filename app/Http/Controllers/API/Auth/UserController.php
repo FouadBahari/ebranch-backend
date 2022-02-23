@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
 use App\Models\Order;
@@ -61,8 +62,8 @@ class UserController extends Controller
                 'address'   => $request->address ,
                 'lat'       => $request->lat ,
                 'lang'      => $request->lang ,
-                'type'    => $request->type ,
-                'status'      => $request->type == 'user' ? 1 : 0 ,
+                'type'      => $request->type ,
+                'status'    => $request->type == 'user' ? 1 : 0 ,
                 'token'     => $request->token
             ]);
 
@@ -171,6 +172,7 @@ class UserController extends Controller
         if($order){
             return $this -> returnError('001','لقد قمت بشحن الكارت من قبل');
         }
+        User::find(Auth::id())->increment('wallet',$card->price);
         OrderCard::create([
             'user_id'   => Auth::id() ,
             'card_id'   => $card->id ,
@@ -180,7 +182,13 @@ class UserController extends Controller
 
     public function orderschargecard()
     {
-        $orders = OrderCard::where('user_id')->with(['card'])->get();
+        $orders = OrderCard::where('user_id',Auth::id())->with(['card'])->get();
         return $this -> returnData('data' , $orders,'تمت العملية بنجاح');
+    }
+
+    public function notifications()
+    {
+        $notifications = Notification::where('user_id',Auth::id())->with(['user','order'])->get();
+        return $this -> returnData('data' , $notifications,'تمت العملية بنجاح');
     }
 }
