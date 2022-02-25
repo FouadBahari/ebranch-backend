@@ -73,7 +73,7 @@ class ApiController extends Controller
 
     public function productsvendor($cat)
     {
-        $products = Product::where('cat_id',$cat)->with('cat')->paginate(10);
+        $products = Product::where('cat_id',$cat)->with('cat')->get();
         return  $this -> returnData('data' , $products,'Done Get products');
     }
 

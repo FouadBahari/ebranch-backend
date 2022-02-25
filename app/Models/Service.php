@@ -8,4 +8,9 @@ class Service extends Model
 {
     protected $table = 'services';
     protected $guarded = [];
+    public function getPhotoAttribute($val)
+    {
+        return ($val !== null) ? asset($val) : "";
+
+    }
 }

@@ -140,6 +140,7 @@ class DashboardController extends Controller
             'name'       => $request->name,
             'phone'      => $request->phone,
             'email'      => $request->email,
+            'type'       => 'charger' ,
             "password"   =>  Hash::make($request->password)
         ]);
 

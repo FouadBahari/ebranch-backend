@@ -5,7 +5,7 @@
     <div class="card bg-danger">
       <div class="card-body text-center">
         <p class="card-text">الطلبات</p>
-        <h4>0</h4>
+        <h4>{{$count}}</h4>
       </div>
     </div>
     <div class="card bg-success">

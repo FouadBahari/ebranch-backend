@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $orders = Order::get();
+        $count = 0;
+        foreach($orders as $order){
+            $count += Product::whereIn('id',explode(',',$order->product_id))->where('user_id',Auth::id())->count();
+        }
+
+        return view('home',compact('count'));
     }
 
     public function updateprofile(Request $request)

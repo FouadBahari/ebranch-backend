@@ -20,7 +20,7 @@
                         </li>
                     </ul>
             </li> --}}
-
+            @if (Auth::guard('admin')->user()->type == "admin")
             <li class="nav-item">
                 <a href=""><i class="la la-tasks"></i>
                         <span class="menu-title" data-i18n="nav.dash.main">الاقسام </span>
@@ -84,7 +84,7 @@
                     <a href=""><i class="la la-male"></i>
                             <span class="menu-title" data-i18n="nav.dash.main">شركات الشحن  </span>
                             <span
-                                class="badge badge badge-primary  badge-pill float-right mr-2">{{App\Models\Admin::where('id','!=',1)->count()}}</span>
+                                class="badge badge badge-primary  badge-pill float-right mr-2">{{App\Models\Admin::where('type','charger')->count()}}</span>
                         </a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="{{route('admin.chargers')}}"
@@ -95,6 +95,41 @@
                             </li>
                         </ul>
                 </li>
+                @endif
+                <li class="nav-item">
+                    <a href=""><i class="la la-bullhorn"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">طلبات شركة الشجن  </span>
+                            <span
+                                class="badge badge badge-dark  badge-pill float-right mr-2">{{App\Models\Order::where('type','charger')->count()}}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">الجديدة</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">تم الموافقة من المتجر</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">تم التنفيذ</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">تم التوصيل</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">متعثر</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">مرتجع</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">ملغاة</a>
+                            </li>
+                            <li><a class="menu-item" href=""
+                                data-i18n="nav.dash.ecommerce">منتهي</a>
+                            </li>
+                        </ul>
+                </li>
+                @if (Auth::guard('admin')->user()->type == "admin")
                 <li class="nav-item">
                     <a href=""><i class="la la-male"></i>
                             <span class="menu-title" data-i18n="nav.dash.main">كروت الشحن  </span>
@@ -144,28 +179,31 @@
                                 class="badge badge badge-dark  badge-pill float-right mr-2">{{App\Models\Order::count()}}</span>
                         </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.orders','new')}}"
                                 data-i18n="nav.dash.ecommerce">الجديدة</a>
                             </li>
-                            <li><a class="menu-item" href=""
-                                data-i18n="nav.dash.ecommerce">جاهز للتوصيل</a>
+                            <li><a class="menu-item" href="{{route('admin.orders','vendoraccept')}}"
+                                data-i18n="nav.dash.ecommerce">تم الموافقة من المتجر</a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.orders','driveraccept')}}"
                                 data-i18n="nav.dash.ecommerce">تحت التنفيذ</a>
                             </li>
-                            <li><a class="menu-item" href=""
-                                data-i18n="nav.dash.ecommerce">جاري التسيم</a>
+                            <li><a class="menu-item" href="{{route('admin.orders','donereceve')}}"
+                                data-i18n="nav.dash.ecommerce">تم التوصيل</a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.orders','debug')}}"
                                 data-i18n="nav.dash.ecommerce">متعثر</a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.orders','back')}}"
                                 data-i18n="nav.dash.ecommerce">مرتجع</a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.orders','cancel')}}"
                                 data-i18n="nav.dash.ecommerce">ملغاة</a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{route('admin.orders','finish')}}"
+                                data-i18n="nav.dash.ecommerce">منتهي</a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.orders','finished')}}"
                                 data-i18n="nav.dash.ecommerce">خالص</a>
                             </li>
                         </ul>
@@ -223,6 +261,7 @@
                             </li>
                         </ul>
                 </li>
+                @endif
         </ul>
     </div>
 </div>

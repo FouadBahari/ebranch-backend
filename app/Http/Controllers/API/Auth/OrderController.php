@@ -173,6 +173,7 @@ class OrderController extends Controller
             $code = $this->returnCodeAccordingToInput($validator);
             return $this->returnValidationError($code, $validator);
         }
+        $driver = User::find(Auth::id());
         $status = '';
         if($request->status == "accept"){
             $status = "تم الموافقة من السائق";
@@ -187,10 +188,14 @@ class OrderController extends Controller
         if(!$order){
             return $this -> returnError('001','الاوردر غير موجود');
         }
+        // if($driver->wallet == 0){
+        //      return $this -> returnError('001','المحفظة فارغة برجاء الشجن والمحاولة لاحفا');
+        // }
         $order->update([
             'status'   => $status,
             'replay'   => $request->reason,
         ]);
+        //$drive->decrement('wallet',1);
         return $this->returnSuccessMessage('تم بنجاح');
     }
 }

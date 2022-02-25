@@ -63,7 +63,8 @@ Route::group( [ 'prefix' => 'LaravelLocalization'::setLocale(),
     });
 
     Route::group(['prefix' => 'orders'], function () {
-        Route::get('/','OrderController@index') -> name('vendor.orders');
+        Route::get('/{type}','OrderController@index') -> name('vendor.orders');
+        Route::get('/status/{status}','OrderController@status') -> name('vendor.orders.status');
     });
 //});
 

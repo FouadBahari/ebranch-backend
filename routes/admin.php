@@ -112,8 +112,13 @@ Route::group(['prefix' => 'reasons'], function () {
     //Route::get('delete/{id}','ReasonController@destroy') -> name('admin.reasons.delete');
 });
 ######################### End reasons Routes  ########################
-
-
+######################### Begin orders Routes ########################
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/{type}','OrderController@index')->name('admin.orders');
+    Route::get('/status/{status}/{id}','OrderController@status')->name('admin.orders.status');
+});
+//طلبات شركة الشحن
+######################### End orders Routes  ########################
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {

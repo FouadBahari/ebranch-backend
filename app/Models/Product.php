@@ -23,6 +23,12 @@ class Product extends Model
     {
         return $this->belongsToMany('App\User','carts');
     }
+    
+     public function getPhotoAttribute($val)
+    {
+        return ($val !== null) ? asset($val) : "";
+
+    }
 
     /*many to many create record
     $user = User::find(2);
