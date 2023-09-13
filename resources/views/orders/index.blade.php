@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <table class="table table-striped table-bordered" style="margin-top:70px">
     <thead>
         <tr>
@@ -14,7 +15,10 @@
         </tr>
     </thead>
     <tbody>
+
         @foreach ($orders as $order)
+        <form  method="get" action="{{route('invoicePrinter') }}" >
+
             <tr>
                 <td>{{$order->id}}</td>
                 <td>{{$order->user->name}}</td>
@@ -34,10 +38,13 @@
                 @endif</td>
                 <td>{{$order->price}}</td>
                 <td>
+                <input type="hidden" name="order_id" value="{{ $order->id }}">
                     <a href="{{route('vendor.orders.status',['accept',$order->id])}}" class="btn btn-info">قبول </a>
                     <a href="{{route('vendor.orders.status',['cancel',$order->id])}}" class="btn btn-danger">رفض </a>
+                    <button type="submit"  class="btn btn-secondary">Print</button>
                 </td>
             </tr>
+        </form>
         @endforeach
     </tbody>
 </table>

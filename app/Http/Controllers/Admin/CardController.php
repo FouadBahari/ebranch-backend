@@ -19,6 +19,20 @@ class CardController extends Controller
     {
         return view('admin.cards.create');
     }
+    public function updateStatus(Request $request,$item)
+    {
+
+      
+         $card = Card::find($item);
+         if($request->status=="on"){
+        $card->update(['status' => 1]);
+         }else {
+            $card->update(['status' => 0]); 
+         }
+
+    
+        return redirect()->route('admin.cards')->with('success', 'Status updated successfully.');
+    }
 
     public function store(Request $request)
     {
@@ -46,10 +60,9 @@ class CardController extends Controller
         return view('admin.cards.edit',compact('coupon'));
     }
 
-    public function update(Request $request , $id)
+    public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'code'     => 'required',
             'price'    => 'required',
         ]);
 
@@ -59,9 +72,21 @@ class CardController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        Card::where('id', $id)->update($request->all());
+        $card=Card::find($request->id);
+
+
+
+        if($card){
+        $card->price=$request->price;
+        $card->update();
+
 
         notify()->success('تم تحديث بيانات بنجاح');
         return redirect()->route('admin.cards')->with(["success","تم تحديث بيانات بنجاح"]);
+
+        }
+  else{
+        return redirect()->route('admin.cards')->with(["error","حطا في التجديث" ]);
+  }
     }
 }

@@ -92,6 +92,50 @@ transition: background 0.4s;
   border-bottom-right-radius: 0;
 }
 </style>
+<style>
+
+.custom-switch {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.custom-switch input[type="checkbox"] {
+    display: none;
+}
+
+.custom-switch label {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Default color for the switch track */
+    border-radius: 30px;
+    transition: background-color 0.2s;
+}
+
+.custom-switch .slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    background-color: #fff; /* Default color for the switch button */
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.custom-switch input:checked + label {
+    background-color: #28a745; /* Color for the "on" state */
+}
+
+.custom-switch input:checked + label .slider {
+    transform: translateX(30px);
+}
+</style>
 <body class="vertical-layout vertical-menu 2-columns  menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
 <!-- fixed-top-->
 @include('admin.includes.header')

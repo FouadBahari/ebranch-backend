@@ -25,6 +25,10 @@ class UserController extends Controller
 
     public function signup(Request $request)
     {
+
+
+     
+
         $rules = [
             'name'      => 'required|string|max:255',
             'email'     => 'required|unique:users',
@@ -44,29 +48,28 @@ class UserController extends Controller
             return $this->returnValidationError($code, $validator);
         }
 
+      
         $filepath = [];
-        if($request->has('photo'))
-        {
-            foreach(explode(',',$request->photo) as $photo){
+        if ($request->has('photo')) {
+            foreach ($request->file('photo') as $photo) {
                 $filepath[] = uploadImage('users', $photo);
             }
-
         }
 
             $user = User::create([
                 'name'      => $request->name,
                 'phone'     => $request->phone,
                 'email'     => $request->email,
-                'photo'     => implode(',',$filepath),
+                'photo'     => implode(',', $filepath),
                 'password'  => Hash::make($request->password),
                 'address'   => $request->address ,
-                'lat'       => $request->lat ,
-                'lang'      => $request->lang ,
+                'lat'       => $request->lat,
+                'lang'      => $request->lang,
                 'type'      => $request->type ,
                 'status'    => $request->type == 'user' ? 1 : 0 ,
                 'token'     => $request->token
             ]);
-
+   
         if(!$user)
             return $this -> returnError('001','Error created User');
 
@@ -165,7 +168,18 @@ class UserController extends Controller
     public function chargecard($code)
     {
         $card  = Card::where('code',$code)->first();
-        $order = OrderCard::where('user_id')->first();
+         
+         if($card->status=="0"){
+          
+
+        
+                return $this -> returnError('001','هذا الكود  منتهي الصلحية ');
+            
+
+         }
+        $order = OrderCard::where('card_id',$card->id)->where('user_id',Auth::id())->first();
+
+
         if(!$card){
             return $this -> returnError('001','هذا الكود غير صحيح');
         }
@@ -183,7 +197,21 @@ class UserController extends Controller
     public function orderschargecard()
     {
         $orders = OrderCard::where('user_id',Auth::id())->with(['card'])->get();
-        return $this -> returnData('data' , $orders,'تمت العملية بنجاح');
+        $user_wallet=User::find(Auth::id());
+        $wallet=$user_wallet->wallet;
+
+
+        
+        $responseData = [
+            'status' => true,
+            'errNum' => "s000",
+            'msg' => "تم",
+            'data' =>  $orders,
+            'wallet' =>  $wallet,
+            'countorders' =>  $user_wallet->countorders,
+            'gain' =>   $user_wallet->gain,
+        ];
+        return response()->json($responseData);
     }
 
     public function notifications()

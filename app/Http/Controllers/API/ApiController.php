@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
 use Twilio\Rest\Client;
@@ -36,9 +37,13 @@ class ApiController extends Controller
 
     public function searchvendors($name)
     {
-        $vendors = User::where('type','vendor')->where('name',$name)->get();
+  
+       $vendors = User::where('type','vendor')->where('name','like',"%$name%")->get();
+
         return  $this -> returnData('vendors' , $vendors,'Done Get vendors');
     }
+
+
 
     public function vendors($idservice)
     {
@@ -82,7 +87,7 @@ class ApiController extends Controller
         $rules = [
             'name'      => 'required|string|max:255',
             'email'     => 'required|email',
-            'subject'   => 'required' ,
+            // 'subject'   => 'required' ,
             'messages'  => 'required' ,
         ];
 
@@ -101,9 +106,13 @@ class ApiController extends Controller
             return $this->returnSuccessMessage('تم الارسال بنجاح');
         }
 
-    public function sliders()
+    public function sliders($id)
     {
+        // $sliders = Banner::inRandomOrder()->limit(5)->get();
+        // $sliders = Banner::where("user_id",$id)->inRandomOrder()->limit(5)->get();
         $sliders = Banner::inRandomOrder()->limit(5)->get();
+
+      
         return  $this -> returnData('data' , $sliders,'Done Get sliders');
     }
 
@@ -111,6 +120,11 @@ class ApiController extends Controller
     {
         $reasons = Reason::where('type',$type)->get();
         return  $this -> returnData('data' , $reasons,'Done Get reasons');
+    }
+    public function get_settings()
+    {
+        $admin = Admin::find(1);
+        return  $this -> returnData('data' , $admin,'Done Get Admins settings');
     }
 
     public function logins(Request $request)

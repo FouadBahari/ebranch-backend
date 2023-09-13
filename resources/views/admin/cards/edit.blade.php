@@ -44,17 +44,17 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.cards.update',$card->id)}}"
+                                        <form class="form" action="{{route('admin.cards.update',$coupon->id)}}"
                                             method="POST">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{$card->id}}">
+                                            <input type="hidden" name="id" value="{{$coupon->id}}">
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات كروت الشحن </h4>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> كود الشحن </label>
-                                                                    <input type="text" value="{{$card->code}}" id="code"
+                                                                    <input type="text" value="{{$coupon->code}}" id="code"
                                                                         class="form-control"
                                                                         placeholder="كود الشحن"
                                                                         name="code" required readonly>
@@ -66,7 +66,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">قيمة الشحن </label>
-                                                                    <input type="number" value="{{$card->price}}" id="price"
+                                                                    <input type="number" value="{{$coupon->price}}" id="price"
                                                                         class="form-control"
                                                                         placeholder="قيمة الشحن"
                                                                         name="price" required>

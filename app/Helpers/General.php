@@ -20,6 +20,8 @@ function uploadImage($folder, $image)
     function sendmessage( $token, $title , $body)
     {
 
+
+        return "hello";
         $token = $token;
         $from = "AAAApppfRac:APA91bEBTETqHAR4ifYBoZ7ECCKHHNQ-PUaea5ACmFQ2WRG5m8H31XAyGSkOCkNF8FiaONGSwTfk-Hsmt-GI5WZ2f0nmuIqMCDCHzsNZdlMFdIKhvfYPTCNNUUVMfTrtb5mEXspPuPm3";
         $msg = array

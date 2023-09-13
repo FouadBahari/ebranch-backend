@@ -51,11 +51,10 @@ Route::group(['prefix' => 'chargers'], function () {
 
     ######################### Begin coupons Routes ########################
     Route::group(['prefix' => 'coupons'], function () {
-        Route::get('/','CouponsController@index') -> name('admin.coupons');
-        Route::get('create','CouponsController@create') -> name('admin.coupons.create');
-        Route::post('store','CouponsController@store') -> name('admin.coupons.store');
-        Route::get('edit/{id}','CouponsController@edit') -> name('admin.coupons.edit');
-        Route::post('update/{id}','CouponsController@update') -> name('admin.coupons.update');
+        Route::get('/','CouponController@index') -> name('admin.coupons');
+        Route::get('create','CouponController@create') -> name('admin.coupons.create');
+        Route::post('store','CouponController@store') -> name('admin.coupons.store');
+        Route::get('edit/{id}','CouponController@edit') -> name('admin.coupons.edit');
         //Route::get('delete/{id}','CouponsController@destroy') -> name('admin.coupons.delete');
     });
     ######################### End coupons Routes  ########################
@@ -73,12 +72,13 @@ Route::group(['prefix' => 'chargers'], function () {
     ######################### Begin users Routes ########################Done
     Route::group(['prefix' => 'users'], function () {
     Route::get('/{type}','UserController@index') -> name('admin.users');
+    Route::post('/deleteVen','UserController@delete_vendor') -> name('admin.users.delete');
     Route::get('/driver/wait-approve','UserController@waitapprove') -> name('admin.users.waitapprove');
     Route::get('/approved/{id}','UserController@approved') -> name('admin.users.approved');
     Route::get('create/{type}','UserController@create') -> name('admin.users.create');
     Route::post('store','UserController@store') -> name('admin.users.store');
     Route::get('edit/{id}','UserController@edit') -> name('admin.users.edit');
-    Route::post('update/{id}','UserController@update') -> name('admin.users.update');
+    Route::post('update/','UserController@update') -> name('admin.users.update');
     //Route::get('delete/{id}','UserController@destroy') -> name('admin.users.delete');
 });
 ######################### End users Routes  #######################
@@ -88,7 +88,9 @@ Route::group(['prefix' => 'cards'], function () {
     Route::get('create','CardController@create') -> name('admin.cards.create');
     Route::post('store','CardController@store') -> name('admin.cards.store');
     Route::get('edit/{id}','CardController@edit') -> name('admin.cards.edit');
-    Route::post('update/{id}','CardController@update') -> name('admin.cards.update');
+    Route::post('/update','CardController@update') -> name('admin.cards.update');
+    Route::post('/update/status/{item}', 'CardController@updateStatus')->name('items.update-status');
+
     //Route::get('delete/{id}','CardController@destroy') -> name('admin.cards.delete');
 });
 ######################### End cards Routes  ########################
@@ -115,16 +117,23 @@ Route::group(['prefix' => 'reasons'], function () {
 ######################### Begin orders Routes ########################
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/{type}','OrderController@index')->name('admin.orders');
+    Route::get('/char/{type}','OrderController@order_charger')->name('admin.orders.charger1');
     Route::get('/status/{status}/{id}','OrderController@status')->name('admin.orders.status');
+    Route::post('/cc','InvoiceController@index')->name('admin.orders.invoice1');
+    // Route::get('/chargerr/{type}','InvoiceController@order_charger')->name('admin.orders.charger1');
+    
 });
 //طلبات شركة الشحن
-######################### End orders Routes  ########################
+    ######################### End orders Routes  
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {
     Route::get('login', 'loginController@getLogin')->name('admin.login');
     Route::post('login', 'loginController@login')->name('admin.login');
 });
+
+
+
 
 //});
 

@@ -23,12 +23,12 @@ Route::group(['namespace' => 'API\Auth'], function () {
     Route::post('signup-user', 'UserController@signup');
     Route::post('Edit-Profile', 'UserController@editprofile');
     Route::get('Data-Edit-User', 'UserController@dataedituser');
-    Route::get('Add-to-cart/{product}', 'UserController@addtocart');
+    Route::post('Add-to-cart/{product}', 'UserController@addtocart');
     Route::get('Remove-from-cart/{product}', 'UserController@removetocart');
     Route::get('All-in-cart', 'UserController@allincart');
 
     Route::get('charge-card/{code}', 'UserController@chargecard');
-    Route::get('Order-charge-card', 'UserController@orderschargecard');
+        Route::get('Order-charge-card', 'UserController@orderschargecard');
     Route::get('notifications', 'UserController@notifications');
 
     #####################orders############################
@@ -48,6 +48,7 @@ Route::group(['namespace' => 'API\Auth'], function () {
 Route::group(['namespace' => 'API'], function () {
     Route::get('services', 'ApiController@services');
     Route::get('allvendors', 'ApiController@allvendors');
+    // Route::get('searchvendors/{name}', 'ApiController@searchvendors');
     Route::get('searchvendors/{name}', 'ApiController@searchvendors');
     Route::get('vendors/{idservice}', 'ApiController@vendors');
     Route::get('categories/{vendor}', 'ApiController@categories');
@@ -58,9 +59,10 @@ Route::group(['namespace' => 'API'], function () {
 
     Route::post('contact-us', 'ApiController@contactus');
 
-    Route::get('sliders', 'ApiController@sliders');
+    Route::get('sliders/{id}', 'ApiController@sliders');
     Route::get('reasons/{type}', 'ApiController@reasons');
     Route::post('logins', 'ApiController@logins');
+    Route::get('get_settings', 'ApiController@get_settings');
     // Route::post('Forget-Password', 'ApiController@forgetpass');
     // Route::post('Verify-Forget-Password', 'ApiController@verifyforgetpass');
     // Route::post('Rest-Password', 'ApiController@restpass');

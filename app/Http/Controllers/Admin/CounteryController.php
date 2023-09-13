@@ -7,7 +7,7 @@ use App\Models\Countery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CouponsController extends Controller
+class CounteryController extends Controller
 {
     public function index()
     {
